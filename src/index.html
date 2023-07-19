@@ -7,25 +7,10 @@
     <link rel="stylesheet" href="./css/styles.css"> 
   </head>
   <body>
-    <div id="banner-message">
-      <p>Select a Breed</p>
-    
-      <input id="breed_search" />
-    
-      <select class="breed_select">
-        <option></option>
-    </select>
-    
-    </div>
-    <div id="breed_data">
-      <img id="breed_image" src="" />
-      <p>
-        Breed Data
-      </p>
-      <table id="breed_data_table">
-    
-      </table>
-    </div>
+    <select class="breed-select"></select>
+    <p class="loader">Loading data, please wait...</p>
+    <p class="error">Oops! Something went wrong! Try reloading the page!</p>
+
     <div class="cat-info"></div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/cat-api.js" type="module"></script>

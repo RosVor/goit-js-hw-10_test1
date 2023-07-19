@@ -4,7 +4,7 @@ body {
     font-family: Helvetica;
   }
   
-  #banner-message {
+  #a{
     background: #fff;
     border-radius: 4px;
     padding: 20px;
@@ -15,7 +15,7 @@ body {
     width: 500px;
   }
   
-  #breed_data {
+  #cat-info {
     background: #fff;
     border-radius: 4px;
     padding: 20px;
@@ -31,4 +31,10 @@ body {
     margin: 0 auto;
     width: 460px;
   }
+  #error {
+    
+  }
   
+  #loader{
+
+  }
