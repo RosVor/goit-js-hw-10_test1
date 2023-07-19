@@ -11,7 +11,6 @@ const breedTemperament = document.querySelector(".breed-temperament");
 loader.style.display = "none";
 error.style.display = "none";
 catInfo.style.display = "none";
-
 function populateBreedSelect(breeds) {
   breeds.forEach(breed => {
     const option = document.createElement("option");
@@ -26,24 +25,48 @@ function showCatInfo(cat) {
   breedDescription.textContent = `Опис: ${cat[0].breeds[0].description}`;
   breedTemperament.textContent = `Темперамент: ${cat[0].breeds[0].temperament}`;
 }
+axios.defaults.headers.common["x-api-key"] = "live_LzWstKXEcTZWINkexwtGU8aD5s4nwnEklAPCGBqnLHNNWMU6PFZUFZBRoLpj5nqA";
+function fetchBreeds() {
+  return axios
+    .get("https://api.thecatapi.com/v1/breeds")
+    .then(response => response.data)
+    .catch(error => {
+      console.error("Error while getting the list of breeds:", error);
+      throw error;
+    });
+}
+
+function fetchCatByBreed(breedId) {
+  const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
+  return axios
+    .get(url)
+    .then(response => response.data)
+    .catch(error => {
+      console.error("Error getting information about cat:", error);
+      throw error;
+    });
+}
 fetchBreeds()
   .then(breeds => {
     populateBreedSelect(breeds);
-    breedSelect.style.display = "block"; 
+    breedSelect.style.display = "block";
   })
   .catch(() => {
-    loader.style.display = "none";
-    catInfo.style.display = "none";
     error.style.display = "block";
   });
+breedSelect.addEventListener("change", event => {
 
+  const breedId = event.target.value;
+  
+  loader.style.display = "block";
   fetchCatByBreed(breedId)
     .then(cat => {
       showCatInfo(cat);
-      loader.style.display = "none"; 
-      catInfo.style.display = "block"; 
+      loader.style.display = "none";
+      catInfo.style.display = "block";
     })
     .catch(() => {
-      loader.style.display = "none"; 
-      error.style.display = "block"; 
+      loader.style.display = "none";
+      error.style.display = "block";
     });
+});
