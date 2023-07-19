@@ -35,7 +35,6 @@ function fetchBreeds() {
       throw error;
     });
 }
-
 function fetchCatByBreed(breedId) {
   const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
   return axios
@@ -55,9 +54,7 @@ fetchBreeds()
     error.style.display = "block";
   });
 breedSelect.addEventListener("change", event => {
-
   const breedId = event.target.value;
-  
   loader.style.display = "block";
   fetchCatByBreed(breedId)
     .then(cat => {
