@@ -37,6 +37,7 @@ fetchBreeds()
 breedSelect.addEventListener("change", event => {
   const breedId = event.target.value;
   loader.style.display = "block"; 
+  
   fetchCatByBreed(breedId)
     .then(cat => {
       showCatInfo(cat);
