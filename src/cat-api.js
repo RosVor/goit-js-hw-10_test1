@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.headers.common["x-api-key"] = "твій ключ";
+axios.defaults.headers.common["x-api-key"] = "live_LzWstKXEcTZWINkexwtGU8aD5s4nwnEklAPCGBqnLHNNWMU6PFZUFZBRoLpj5nqA";
 export function fetchBreeds() {
   return axios.get("https://api.thecatapi.com/v1/breeds")
     .then(response => response.data)
