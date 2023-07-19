@@ -32,12 +32,11 @@ fetchBreeds()
     breedSelect.style.display = "block"; 
   })
   .catch(() => {
-    error.style.display = "block"; 
+    loader.style.display = "none";
+    catInfo.style.display = "none";
+    error.style.display = "block";
   });
-breedSelect.addEventListener("change", event => {
-  const breedId = event.target.value;
-  loader.style.display = "block"; 
-  
+
   fetchCatByBreed(breedId)
     .then(cat => {
       showCatInfo(cat);
@@ -48,4 +47,3 @@ breedSelect.addEventListener("change", event => {
       loader.style.display = "none"; 
       error.style.display = "block"; 
     });
-});
