@@ -18,25 +18,17 @@ function populateBreedSelect(breeds) {
 }
 function showCatInfo(cat) {
   catInfo.innerHTML = "";
-
   const image = document.createElement("img");
-
   image.src = cat[0].url;
   image.alt = "Cat";
   catInfo.appendChild(image);
-
   const breedName = document.createElement("h3");
-
   breedName.textContent = cat[0].breeds[0].name;
   catInfo.appendChild(breedName);
-
   const description = document.createElement("p");
-
   description.textContent = cat[0].breeds[0].description;
   catInfo.appendChild(description);
-
   const temperament = document.createElement("p");
-
   temperament.textContent = `Temperament: ${cat[0].breeds[0].temperament}`;
   catInfo.appendChild(temperament);
 }
@@ -48,7 +40,6 @@ fetchBreeds()
   .catch(() => {
     error.style.display = "block"; 
   });
-
 breedSelect.addEventListener("change", event => {
   const breedId = event.target.value;
   loader.style.display = "block"; 
