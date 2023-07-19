@@ -30,3 +30,15 @@ h1 {
   border-radius: 10px;
   margin-bottom: 10px;
 }
+.breed-name {
+  font-size: 1.2em;
+}
+
+.breed-description {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.breed-temperament {
+  font-size: 1.1em;
+}
