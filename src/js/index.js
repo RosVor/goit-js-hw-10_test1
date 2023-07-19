@@ -7,7 +7,7 @@ const catInfo = document.querySelector(".cat-info");
 const catImage = document.querySelector(".cat-image");
 const breedName = document.querySelector(".breed-name");
 const breedDescription = document.querySelector(".breed-description");
-const breedTemperament = document.querySelector(".breed-temperament");
+
 loader.style.display = "none";
 error.style.display = "none";
 catInfo.style.display = "none";
