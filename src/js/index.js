@@ -8,7 +8,6 @@ const catImage = document.querySelector(".cat-image");
 const breedName = document.querySelector(".breed-name");
 const breedDescription = document.querySelector(".breed-description");
 const breedTemperament = document.querySelector(".breed-temperament");
-
 loader.style.display = "none";
 error.style.display = "none";
 catInfo.style.display = "none";
@@ -21,14 +20,12 @@ function populateBreedSelect(breeds) {
     breedSelect.appendChild(option);
   });
 }
-
 function showCatInfo(cat) {
   catImage.src = cat[0].url;
   breedName.textContent = `Порода: ${cat[0].breeds[0].name}`;
   breedDescription.textContent = `Опис: ${cat[0].breeds[0].description}`;
   breedTemperament.textContent = `Темперамент: ${cat[0].breeds[0].temperament}`;
 }
-
 fetchBreeds()
   .then(breeds => {
     populateBreedSelect(breeds);
@@ -37,7 +34,6 @@ fetchBreeds()
   .catch(() => {
     error.style.display = "block"; 
   });
-
 breedSelect.addEventListener("change", event => {
   const breedId = event.target.value;
   loader.style.display = "block"; 
