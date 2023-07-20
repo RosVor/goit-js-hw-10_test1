@@ -1,4 +1,3 @@
-
 const options = {headers: {
   'x-api-key': `live_LzWstKXEcTZWINkexwtGU8aD5s4nwnEklAPCGBqnLHNNWMU6PFZUFZBRoLpj5nqA`
 }
@@ -11,6 +10,7 @@ return fetch(`https://api.thecatapi.com/v1/breeds`, options)
   }
 return response.json();
 })}
+
 export function fetchCatByBreed(breedId) {
   return fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`, options)
   .then((response) => {

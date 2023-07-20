@@ -7,7 +7,6 @@ const div = document.querySelector('.cat-info');
 
 error.style.display = 'none';
 select.style.display = 'none';
-
 getBreeds()
   .then(data => {
     loader.style.display = 'none';
@@ -18,7 +17,6 @@ getBreeds()
   .finally(() => loader.style.display = 'none');
 
 select.addEventListener('change', onChangeBreed);
-
 function onChangeBreed(e) {
     e.preventDefault();
     loader.style.display = 'block';
