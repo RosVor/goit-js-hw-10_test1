@@ -7,6 +7,7 @@ const catInfo = document.querySelector(".cat-info");
 const catImage = document.querySelector(".cat-image");
 const breedName = document.querySelector(".breed-name");
 const breedDescription = document.querySelector(".breed-description");
+const breedTemperament = document.querySelector(".breed-temperament");
 
 loader.style.display = "none";
 error.style.display = "none";
@@ -20,12 +21,14 @@ function populateBreedSelect(breeds) {
     breedSelect.appendChild(option);
   });
 }
+
 function showCatInfo(cat) {
   catImage.src = cat[0].url;
   breedName.textContent = `Порода: ${cat[0].breeds[0].name}`;
   breedDescription.textContent = `Опис: ${cat[0].breeds[0].description}`;
   breedTemperament.textContent = `Темперамент: ${cat[0].breeds[0].temperament}`;
 }
+
 axios.defaults.headers.common["x-api-key"] = "live_LzWstKXEcTZWINkexwtGU8aD5s4nwnEklAPCGBqnLHNNWMU6PFZUFZBRoLpj5nqA";
 
 function fetchBreeds() {
@@ -37,6 +40,7 @@ function fetchBreeds() {
       throw error;
     });
 }
+
 function fetchCatByBreed(breedId) {
   const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
   return axios
@@ -47,6 +51,7 @@ function fetchCatByBreed(breedId) {
       throw error;
     });
 }
+
 fetchBreeds()
   .then(breeds => {
     populateBreedSelect(breeds);
@@ -59,6 +64,7 @@ fetchBreeds()
 breedSelect.addEventListener("change", event => {
   const breedId = event.target.value;
   loader.style.display = "block";
+
   fetchCatByBreed(breedId)
     .then(cat => {
       showCatInfo(cat);
