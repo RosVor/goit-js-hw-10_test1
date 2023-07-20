@@ -20,7 +20,6 @@ function populateBreedSelect(breeds) {
     breedSelect.appendChild(option);
   });
 }
-
 function showCatInfo(cat) {
   catImage.src = cat[0].url;
   breedName.textContent = `Порода: ${cat[0].breeds[0].name}`;
