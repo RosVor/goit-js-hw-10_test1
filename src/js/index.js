@@ -1,67 +1,46 @@
 import { getBreeds, fetchCatByBreed } from "./cat-api";
 
-const breedSelect = document.querySelector(".breed-select");
-const loader = document.querySelector(".loader");
-const error = document.querySelector(".error");
-const catInfo = document.querySelector(".cat-info");
-const catImage = document.querySelector(".cat-image");
-const breedName = document.querySelector(".breed-name");
-const breedDescription = document.querySelector(".breed-description");
-const breedTemperament = document.querySelector(".breed-temperament");
+const select = document.querySelector(`.breed-select`);
+const loader = document.querySelector(`.loader`);
+const error = document.querySelector(`.error`);
+const div = document.querySelector(`.cat-info`);
 
-loader.style.display = "none";
-error.style.display = "none";
-catInfo.style.display = "none";
+error.style.visibility = `hidden`;
+select.style.visibility = `hidden`;
 
-function populateBreedSelect(breeds) {
-  breeds.forEach(breed => {
-    const option = document.createElement("option");
-    option.value = breed.id;
-    option.textContent = breed.name;
-    breedSelect.appendChild(option);
-  });
+getBreeds().then(data => {
+    loader.style.visibility = `visible`;
+    loader.style.visibility = `hidden`;
+    select.style.visibility = `visible`;
+    select.innerHTML = data.map(element => `<option value="${element.id}">${element.name}</option>`).join(``);
+})
+.catch(() => error.style.visibility = `visible`)
+.finally(() => loader.style.visibility = `hidden`)
+select.addEventListener(`change`, onChangeBreed);
+
+function onChangeBreed(e) {
+    e.preventDefault();
+    loader.style.visibility = `visible`;
+    div.style.visibility = `hidden`;
+    let breedId = e.target.value;
+    fetchCatByBreed(breedId)
+        .then(data => {
+            loader.style.visibility = `hidden`;
+            div.style.visibility = `visible`;
+            div.innerHTML = data.map(element =>
+                `<div><img src="${element.url}" alt="photo cat" width="500" height="400"/></div>`).join(``)
+            data.map(el => el.breeds.forEach(cat => {
+                const array = [cat];
+                const findCat = array.find(option => option.id === breedId);
+                const makrup = `<div>
+                <h2>${findCat.name}</h2>
+                <p>${findCat.description}</p>
+                <h3>Temperament</h3>
+                <p>${findCat.temperament}</p>
+                </div>`
+                div.insertAdjacentHTML(`beforeend`, makrup)
+            }))
+        })
+        .catch((error) => error.style.visibility = 'visible')
+        .finally(() => loader.style.visibility = `hidden`)
 }
-
-function showCatInfo(cat) {
-  catImage.src = cat[0].url;
-  breedName.textContent = `Порода: ${cat[0].breeds[0].name}`;
-  breedDescription.textContent = `Опис: ${cat[0].breeds[0].description}`;
-  breedTemperament.textContent = `Темперамент: ${cat[0].breeds[0].temperament}`;
-}
-
-axios.defaults.headers.common["x-api-key"] = "live_LzWstKXEcTZWINkexwtGU8aD5s4nwnEklAPCGBqnLHNNWMU6PFZUFZBRoLpj5nqA";
-
-function getBreeds() {
-  return axios
-    .get("https://api.thecatapi.com/v1/breeds")
-    .then(response => response.data)
-    .catch(error => {
-      console.error("Error while getting the list of breeds:", error);
-      throw error;
-    });
-}
-
-getBreeds()
-  .then(breeds => {
-    populateBreedSelect(breeds);
-    breedSelect.style.display = "block";
-  })
-  .catch(() => {
-    error.style.display = "block";
-  });
-
-breedSelect.addEventListener("change", event => {
-  const breedId = event.target.value;
-  loader.style.display = "block";
-
-  fetchCatByBreed(breedId)
-    .then(cat => {
-      showCatInfo(cat);
-      loader.style.display = "none";
-      catInfo.style.display = "block";
-    })
-    .catch(() => {
-      loader.style.display = "none";
-      error.style.display = "block";
-    });
-});
