@@ -1,4 +1,4 @@
-import { fetchBreeds, fetchCatByBreed } from "./cat-api";
+import { getBreeds, fetchCatByBreed } from "./cat-api";
 
 const breedSelect = document.querySelector(".breed-select");
 const loader = document.querySelector(".loader");
@@ -31,7 +31,7 @@ function showCatInfo(cat) {
 
 axios.defaults.headers.common["x-api-key"] = "live_LzWstKXEcTZWINkexwtGU8aD5s4nwnEklAPCGBqnLHNNWMU6PFZUFZBRoLpj5nqA";
 
-function fetchBreeds() {
+function getBreeds() {
   return axios
     .get("https://api.thecatapi.com/v1/breeds")
     .then(response => response.data)
@@ -41,18 +41,7 @@ function fetchBreeds() {
     });
 }
 
-function fetchCatByBreed(breedId) {
-  const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
-  return axios
-    .get(url)
-    .then(response => response.data)
-    .catch(error => {
-      console.error("Error getting information about cat:", error);
-      throw error;
-    });
-}
-
-fetchBreeds()
+getBreeds()
   .then(breeds => {
     populateBreedSelect(breeds);
     breedSelect.style.display = "block";
