@@ -11,6 +11,7 @@ const breedDescription = document.querySelector(".breed-description");
 loader.style.display = "none";
 error.style.display = "none";
 catInfo.style.display = "none";
+
 function populateBreedSelect(breeds) {
   breeds.forEach(breed => {
     const option = document.createElement("option");
@@ -19,6 +20,7 @@ function populateBreedSelect(breeds) {
     breedSelect.appendChild(option);
   });
 }
+
 function showCatInfo(cat) {
   catImage.src = cat[0].url;
   breedName.textContent = `Порода: ${cat[0].breeds[0].name}`;
@@ -26,6 +28,7 @@ function showCatInfo(cat) {
   breedTemperament.textContent = `Темперамент: ${cat[0].breeds[0].temperament}`;
 }
 axios.defaults.headers.common["x-api-key"] = "live_LzWstKXEcTZWINkexwtGU8aD5s4nwnEklAPCGBqnLHNNWMU6PFZUFZBRoLpj5nqA";
+
 function fetchBreeds() {
   return axios
     .get("https://api.thecatapi.com/v1/breeds")
@@ -53,6 +56,7 @@ fetchBreeds()
   .catch(() => {
     error.style.display = "block";
   });
+
 breedSelect.addEventListener("change", event => {
   const breedId = event.target.value;
   loader.style.display = "block";
