@@ -1,0 +1,1 @@
+{"mappings":"ACAA,iCAIA","sources":["index.f7f53907.css","src/css/styles.css"],"sourcesContent":[".error {\n  color: red;\n  margin-top: 15px;\n}\n\n.loader {\n  margin-top: 15px;\n}\n\n/*# sourceMappingURL=index.f7f53907.css.map */\n",".error{\n  margin-top: 15px;\n  color: red;\n}\n.loader{\n  margin-top: 15px;\n}"],"names":[],"version":3,"file":"index.f7f53907.css.map"}
