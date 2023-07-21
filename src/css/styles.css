@@ -1,3 +1,7 @@
 .error{
+  margin-top: 15px;
   color: red;
+}
+.loader{
+  margin-top: 15px;
 }
