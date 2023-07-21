@@ -4,7 +4,6 @@ const select = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 const div = document.querySelector('.cat-info');
-
 error.style.display = 'none';
 select.style.display = 'none';
 getBreeds()
@@ -15,7 +14,6 @@ getBreeds()
   })
   .catch(() => error.style.display = 'block')
   .finally(() => loader.style.display = 'none');
-
 select.addEventListener('change', onChangeBreed);
 function onChangeBreed(e) {
     e.preventDefault();
